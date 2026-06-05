@@ -1,0 +1,166 @@
+"use client";
+
+import type { FC } from "react";
+import { T } from "@/lib/tokens";
+import type { CursorRefs } from "@/lib/types";
+import { expandCursor, resetCursor } from "@/lib/cursor";
+import SectionLabel from "@/components/SectionLabel";
+
+const labelStyle = {
+  fontFamily: "'Josefin Sans', sans-serif",
+  fontSize: "0.7rem",
+  letterSpacing: "0.35em",
+  textTransform: "uppercase" as const,
+  color: T.taupeDark,
+};
+
+const linkStyle = {
+  fontFamily: "'Cormorant Garamond', serif",
+  fontSize: "clamp(1.5rem, 2.5vw, 1rem)",
+  fontWeight: 300,
+  fontStyle: "italic",
+  color: T.charcoal,
+  textDecoration: "none",
+  // borderBottom: `1px solid ${T.charcoal}`,
+  paddingBottom: "0.5rem",
+  display: "inline-block",
+  width: "100%",
+  transition: "all 0.4s ease",
+};
+
+const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
+  <section
+    id="contact"
+    style={{
+      background: T.parchment,
+      padding: "10rem 10%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "80vh",
+    }}
+  >
+    <div
+      className="reveal"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "6rem",
+        maxWidth: "1200px",
+        width: "100%",
+        alignItems: "start",
+      }}
+    >
+      {/* ── Left Column: Editorial Editorial Headline ── */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <SectionLabel>Contact</SectionLabel>
+
+        <h2
+          style={{
+            fontSize: "clamp(3rem, 6vw, 5.5rem)",
+            fontWeight: 300,
+            lineHeight: 1.0,
+            color: T.charcoal,
+            letterSpacing: "-0.02em",
+            margin: "2rem 0",
+            fontFamily: "'Cormorant Garamond', serif",
+          }}
+        >
+          Let&apos;s <br />
+          <span style={{ fontStyle: "italic", paddingLeft: "1.5rem" }}>connect.</span>
+        </h2>
+
+        <p
+          style={{
+            fontSize: "1.1rem",
+            fontWeight: 300,
+            lineHeight: 1.8,
+            color: T.taupeDark,
+            maxWidth: "24rem",
+            fontFamily: "'Cormorant Garamond', serif",
+          }}
+        >
+          Whether you have an interesting project idea, a question about my work, 
+          or just want to chat, feel free to reach out! <br />
+          I&apos;m always open to new connections and opportunities.
+        </p>
+      </div>
+
+      {/* ── Right Column: Magazine Registry / Directory Index ── */}
+      <div 
+        style={{ 
+          borderLeft: `2px solid ${T.taupe}`,
+          padding: "5rem 4rem", 
+          width: "100%", 
+          boxShadow: `0 20px 40px rgba(0,0,0,0.015)`,
+          display: "flex",
+          flexDirection: "column",
+          gap: "3.5rem"
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Josefin Sans', sans-serif",
+            fontSize: "0.7rem",
+            fontWeight: 400,
+            letterSpacing: "0.4em",
+            textTransform: "uppercase",
+            color: T.charcoal,
+            borderBottom: `2px solid ${T.taupe}`,
+            paddingBottom: "1rem",
+            margin: 0
+          }}
+        >
+          Direct Contacts
+        </p>
+
+        {/* Channel 01: Electronic Mail */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <span style={labelStyle}>01 / General Inquiry</span>
+          <a
+            href="mailto:lee.jiayun2712@gmail.com"
+            onMouseEnter={() => expandCursor(cursor)}
+            onMouseLeave={() => resetCursor(cursor)}
+            onMouseOver={(e) => {
+              e.currentTarget.style.color = T.steelBlue;
+              e.currentTarget.style.paddingLeft = "0.5rem";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.color = T.taupe;
+              e.currentTarget.style.paddingLeft = "0rem";
+            }}
+            style={linkStyle}
+          >
+            lee.jiayun2712@gmail.com
+          </a>
+        </div>
+
+        {/* Channel 02: LinkedIn Syndicate */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <span style={labelStyle}>02 / Professional Syndicate</span>
+          <a
+            href="https://www.linkedin.com/in/jjiayun-lee/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => expandCursor(cursor)}
+            onMouseLeave={() => resetCursor(cursor)}
+            onMouseOver={(e) => {
+              e.currentTarget.style.color = T.steelBlue;
+              e.currentTarget.style.paddingLeft = "0.5rem";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.color = T.taupe;
+              e.currentTarget.style.paddingLeft = "0rem";
+            }}
+            style={linkStyle}
+          >
+            linkedin.com/in/jjiayun-lee
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+export default Contact;
