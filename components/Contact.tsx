@@ -30,6 +30,7 @@ const linkStyle = {
 
 const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
   <section
+    className="contact-section"
     id="contact"
     style={{
       background: T.parchment,
@@ -46,16 +47,14 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: "6rem",
-        maxWidth: "1200px",
+        gap: "3rem",
         width: "100%",
         alignItems: "start",
       }}
     >
       {/* ── Left Column: Editorial Editorial Headline ── */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="contact-grid" style={{ display: "flex", flexDirection: "column" }}>
         <SectionLabel>Contact</SectionLabel>
-
         <h2
           style={{
             fontSize: "clamp(3rem, 6vw, 5.5rem)",
@@ -81,19 +80,17 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
             fontFamily: "'Cormorant Garamond', serif",
           }}
         >
-          Whether you have an interesting project idea, a question about my work, 
-          or just want to chat, feel free to reach out! <br />
+          Whether you have an interesting project idea, or just want to chat, feel free to reach out! <br />
           I&apos;m always open to new connections and opportunities.
         </p>
       </div>
 
-      {/* ── Right Column: Magazine Registry / Directory Index ── */}
-      <div 
+      {/* ── Right Column: Contact Info ── */}
+      <div className="contact-right-col"
         style={{ 
           borderLeft: `2px solid ${T.taupe}`,
           padding: "5rem 4rem", 
           width: "100%", 
-          boxShadow: `0 20px 40px rgba(0,0,0,0.015)`,
           display: "flex",
           flexDirection: "column",
           gap: "3.5rem"
@@ -114,12 +111,10 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
         >
           Direct Contacts
         </p>
-
-        {/* Channel 01: Electronic Mail */}
         <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-          <span style={labelStyle}>01 / General Inquiry</span>
+          <span style={labelStyle}>01 / Email</span>
           <a
-            href="mailto:lee.jiayun2712@gmail.com"
+            href="mailto:jiayun.lee@mail.utoronto.ca"
             onMouseEnter={() => expandCursor(cursor)}
             onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => {
@@ -132,13 +127,12 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
             }}
             style={linkStyle}
           >
-            lee.jiayun2712@gmail.com
+            jiayun.lee@mail.utoronto.ca
           </a>
         </div>
 
-        {/* Channel 02: LinkedIn Syndicate */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-          <span style={labelStyle}>02 / Professional Syndicate</span>
+        <div style={{ display: "flex", flexDirection: "column", width: "100%", gap: "0.75rem" }}>
+          <span style={labelStyle}>02 / LinkedIn</span>
           <a
             href="https://www.linkedin.com/in/jjiayun-lee/"
             target="_blank"

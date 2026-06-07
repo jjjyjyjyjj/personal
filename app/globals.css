@@ -77,3 +77,93 @@ button, select, input, textarea {
   opacity: 1 !important;
   transform: translateX(0) !important;
 }
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+
+  .cursor,
+  .cursor-ring {
+    display: none;
+  }
+
+  nav {
+    padding: 1.2rem 1.5rem;
+  }
+
+  nav ul {
+    gap: 1.2rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-right-panel, .hero-buttons, .hero-lang-card{
+    display: none !important;
+  }
+
+  .hero-left-panel {
+    padding: 7rem 2rem 4rem 2rem !important;
+    min-height: 100vh;
+  }
+
+  .hero-lang-card {
+    left: 1rem !important;
+    right: 1rem !important;
+    max-width: none !important;
+    bottom: 2rem !important;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-image-col {
+    display: none !important;
+  }
+
+  .about-text-col {
+    padding: 4rem 2rem !important;
+  }
+
+  .projects-section {
+    padding: 4rem 5% !important;
+  }
+
+  .project-catalog-row {
+    grid-template-columns: 0.4fr 1fr !important;
+  }
+
+  .project-cat-col {
+    display: none !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+
+  .contact-section {
+    padding: 5rem 2rem !important;
+  }
+
+  .contact-right-col {
+    border-left: none !important;
+    padding: 2rem 0 !important;
+    border-top: 2px solid #B09A82;
+  }
+
+  footer {
+    padding: 2rem 1.5rem !important;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+.parallax-wrap {
+  will-change: transform;
+}

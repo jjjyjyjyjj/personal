@@ -4,15 +4,13 @@ import type { CardData, ServiceData, StatData } from "./types";
 export const NAV_LINKS = ["Projects", "About", "Contact"] as const;
 
 export const MARQUEE_ITEMS = [
-  "Python",
-  "C",
-  "Java",
-  "SQL",
-  "TypeScript",
-  "JavaScript",
   "React",
-  "HTML/CSS",
-  "Assembly"
+  "Node.js",
+  "Next.js",
+  "Supabase",
+  "OpenCV",
+  "Gemini API",
+  "Git/GitHub"
 ] as const;
 
 export const PROJECTS: CardData[] = [
@@ -74,10 +72,10 @@ export const PROJECTS: CardData[] = [
   },
 ];
 
-export const STATS: StatData[] = [
-  // { value: "May-Aug", label: "Cybersecurity Consulting Intern @ EY" },
-  // { value: "JAn-APr",   label: "Collections" },
-  // { value: "3",   label: "Fashion weeks" },
-];
+// export const STATS: StatData[] = [
+//   { value: "May-Aug", label: "Cybersecurity Consulting Intern @ EY" },
+//   { value: "JAn-APr",   label: "Collections" },
+//   { value: "3",   label: "Fashion weeks" },
+// ];
 
 export const FOOTER_LINKS = ["Back to Top"] as const;

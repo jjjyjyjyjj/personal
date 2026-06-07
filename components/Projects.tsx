@@ -1,90 +1,3 @@
-// "use client";
-
-// import type { FC } from "react";
-// import { T } from "@/lib/tokens";
-// import { CARDS } from "@/lib/data";
-// import type { CardData, CursorRefs } from "@/lib/types";
-// import { expandCursor, resetCursor } from "@/lib/cursor";
-// import SectionLabel from "./SectionLabel";
-
-// const WorkCard: FC<{ card: CardData; cursor: CursorRefs }> = ({ card, cursor }) => (
-//   <div
-//     className="work-card"
-//     onMouseEnter={() => expandCursor(cursor)}
-//     onMouseLeave={() => resetCursor(cursor)}
-//     style={{
-//       position: "relative", overflow: "hidden", background: T.parchment,
-//       gridColumn: card.tall ? "1 / 2" : undefined,
-//       gridRow:    card.tall ? "1 / 3" : undefined,
-//     }}
-//   >
-//     <div style={{
-//       aspectRatio: card.tall ? undefined : "3/4",
-//       position: "relative", overflow: "hidden",
-//       height:    card.tall ? "100%"  : undefined,
-//       minHeight: card.tall ? 500     : undefined,
-//     }}>
-//       {/* Background */}
-//       <div
-//         className="card-bg"
-//         style={{ position:"absolute", inset:0, background:card.bg, transition:"transform 0.6s ease" }}
-//       >
-//         <div style={{ position:"absolute", inset:0, background:card.blobs.join(", ") }} />
-//         {card.lines && <div style={{ position:"absolute", inset:0, background:card.lines }} />}
-//       </div>
-
-//       {/* Hover overlay */}
-//       <div
-//         className="card-overlay"
-//         style={{
-//           position:"absolute", inset:0,
-//           background:"linear-gradient(to top, rgba(14,15,13,0.75) 0%, transparent 60%)",
-//           opacity:0, transition:"opacity 0.4s",
-//           display:"flex", alignItems:"flex-end", padding:"2rem",
-//         }}
-//       >
-//         <div style={{ color:"white" }}>
-//           <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.55rem", letterSpacing:"0.3em", textTransform:"uppercase", color:"rgba(255,255,255,0.6)", marginBottom:"0.3rem" }}>
-//             {card.season}
-//           </p>
-//           <p style={{ fontSize:"1.2rem", fontStyle:"italic" }}>{card.title}</p>
-//         </div>
-//       </div>
-//     </div>
-
-//     <div style={{ padding:"1.2rem" }}>
-//       <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.55rem", letterSpacing:"0.3em", textTransform:"uppercase", color:T.steelBlue, marginBottom:"0.4rem" }}>
-//         {card.cat}
-//       </p>
-//       <p style={{ fontSize:"1.1rem", fontWeight:300, fontStyle:"italic", color:T.charcoal }}>
-//         {card.collection}
-//       </p>
-//     </div>
-//   </div>
-// );
-
-// const Work: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
-//   <section id="work" style={{ padding:"8rem 4rem", background:T.cream }}>
-//     <SectionLabel>Projects</SectionLabel>
-//     <div className="reveal" style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"4rem" }}>
-//       <h2 style={{ fontSize:"clamp(2.5rem,4vw,3rem)", fontWeight:300, color:T.charcoal, lineHeight:1.1 }}>
-//         Some of my past creations:<br />
-//       </h2>
-//       <span style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.6rem", fontWeight:200, letterSpacing:"0.3em", textTransform:"uppercase", color:T.taupe }}>
-//         2021 — 2025
-//       </span>
-//     </div>
-
-//     <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gridTemplateRows:"auto auto", gap:"1.5rem" }}>
-//       {CARDS.map((card) => (
-//         <WorkCard key={card.id} card={card} cursor={cursor} />
-//       ))}
-//     </div>
-//   </section>
-// );
-
-// export default Work;
-
 "use client";
 
 import type { FC } from "react";
@@ -139,7 +52,7 @@ const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({
       </span>
 
       {/* Column 2: Core Project Details */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+      <div className="projects-section" style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
         <h3
           style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -166,7 +79,7 @@ const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({
       </div>
 
       {/* Column 3: Languages / Frameworks */}
-      <span
+      <span className="project-cat-col"
         style={{
           fontFamily: "'Josefin Sans', sans-serif",
           fontSize: "0.65rem",
@@ -186,7 +99,7 @@ const Projects: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
   <section 
     id="projects" 
     style={{ 
-      padding: "10rem 10%", // Wider editorial margins
+      padding: "6rem 10%", // Wider editorial margins
       background: T.cream,
       minHeight: "100vh"
     }}
