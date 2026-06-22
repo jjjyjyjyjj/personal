@@ -36,7 +36,7 @@ const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({
       }}
     >
       {/* Column 1: Index */}
-      <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"0.75rem", fontWeight:300, color:T.grey, letterSpacing:"0.1em" }}>
+      <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"0.95rem", fontWeight:400, color:T.grey, letterSpacing:"0.1em" }}>
         {displayIndex}
       </span>
 
@@ -52,7 +52,7 @@ const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({
 
       {/* Column 3: Category + link arrow */}
       <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginLeft:"2.4rem" }}>
-        <span className="project-cat-col" style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.65rem", letterSpacing:"0.2em", textTransform:"uppercase", color:T.steelBlue }}>
+        <span className="project-cat-col" style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.steelBlue }}>
           {card.cat}
         </span>
         {card.link && (
