@@ -8,11 +8,11 @@ import { expandCursor, resetCursor } from "@/lib/cursor";
 
 const Footer: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
   <footer style={{ background:T.ink, padding:"2rem 6rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-    <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"1rem", fontWeight:300, letterSpacing:"0.3em", textTransform:"uppercase", color:T.ivory }}>
+    <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1rem", fontWeight:300, letterSpacing:"0.3em", textTransform:"uppercase", color:T.ivory }}>
       Jia
     </span>
 
-    <div style={{ display:"flex", gap:"2rem" }}>
+    <div style={{ display:"flex", flexDirection:"row", gap:"2rem" }}>
       {FOOTER_LINKS.map((link) => (
         <a
           key={link}

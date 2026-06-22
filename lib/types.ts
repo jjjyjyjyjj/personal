@@ -13,6 +13,7 @@ export interface CardData {
   bg:         string;
   blobs:      string[];
   lines?:     string;
+  link?:      string;
 }
 
 export interface ServiceData {

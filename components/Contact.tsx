@@ -11,11 +11,11 @@ const labelStyle = {
   fontSize: "0.7rem",
   letterSpacing: "0.35em",
   textTransform: "uppercase" as const,
-  color: T.taupeDark,
+  color: T.greyDark,
 };
 
 const linkStyle = {
-  fontFamily: "'Cormorant Garamond', serif",
+  fontFamily:"'Josefin Sans', sans-serif",
   fontSize: "clamp(1.5rem, 2.5vw, 1rem)",
   fontWeight: 300,
   fontStyle: "italic",
@@ -36,11 +36,11 @@ const ContactBg: FC = () => (
       position: "absolute",
       bottom: "-4rem",
       left: "-2rem",
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "'Helvetica Neue', sans-serif",
       fontSize: "clamp(10rem, 22vw, 20rem)",
-      fontWeight: 300,
+      fontWeight: 600,
       fontStyle: "italic",
-      color: T.taupe,
+      color: T.grey,
       opacity: 0.07,
       lineHeight: 1,
       letterSpacing: "-0.03em",
@@ -56,7 +56,7 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
     className="contact-section"
     id="contact"
     style={{
-      background: T.parchment,
+      // background: T.parchment,
       padding: "10rem 10%",
       display: "flex",
       flexDirection: "column",
@@ -83,11 +83,11 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
       {/* ── Left Column ── */}
       <div className="contact-grid" style={{ display:"flex", flexDirection:"column" }}>
         <SectionLabel>Contact</SectionLabel>
-        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:300, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.02em", margin:"2rem 0", fontFamily:"'Cormorant Garamond',serif" }}>
+        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:900, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.07em", margin:"2rem 0", fontFamily:"'Helvetica Neue', sans-serif", }}>
           Let&apos;s <br />
           <span style={{ fontStyle:"italic", paddingLeft:"1.5rem" }}>connect.</span>
         </h2>
-        <p style={{ fontSize:"1.1rem", fontWeight:300, lineHeight:1.8, color:T.taupeDark, maxWidth:"24rem", fontFamily:"'Cormorant Garamond',serif" }}>
+        <p style={{ fontSize:"1.1rem", fontWeight:300, lineHeight:1.8, color:T.greyDark, maxWidth:"24rem", fontFamily:"'Helvetica Neue', sans-serif" }}>
           Whether you have an interesting project idea, or just want to chat, feel free to reach out!<br />
           I&apos;m always open to new connections and opportunities.
         </p>
@@ -96,9 +96,9 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
       {/* ── Right Column ── */}
       <div
         className="contact-right-col"
-        style={{ borderLeft:`2px solid ${T.taupe}`, padding:"5rem 4rem", width:"100%", display:"flex", flexDirection:"column", gap:"3.5rem" }}
+        style={{ borderLeft:`2px solid ${T.grey}`, padding:"5rem 4rem", width:"100%", display:"flex", flexDirection:"column", gap:"3.5rem" }}
       >
-        <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.taupe}`, paddingBottom:"1rem", margin:0 }}>
+        <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
           Direct Contacts
         </p>
 
@@ -107,7 +107,7 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
           <a href="mailto:jiayun.lee@mail.utoronto.ca"
             onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
-            onMouseOut={(e)  => { e.currentTarget.style.color = T.taupe;     e.currentTarget.style.paddingLeft = "0rem"; }}
+            onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
             style={linkStyle}>
             jiayun.lee@mail.utoronto.ca
           </a>
@@ -119,7 +119,7 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
             target="_blank" rel="noopener noreferrer"
             onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
-            onMouseOut={(e)  => { e.currentTarget.style.color = T.taupe;     e.currentTarget.style.paddingLeft = "0rem"; }}
+            onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
             style={linkStyle}>
             linkedin.com/in/jjiayun-lee
           </a>

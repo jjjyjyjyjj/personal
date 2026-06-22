@@ -20,7 +20,7 @@ const Nav: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
     <Link
       href="/"
       style={{
-        fontFamily: "'Cormorant Garamond', serif",
+        fontFamily:"'Helvetica Neue', sans-serif",
         fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.3em",
         textTransform: "uppercase", color: T.charcoal, textDecoration: "none",
       }}
