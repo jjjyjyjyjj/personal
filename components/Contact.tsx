@@ -2,8 +2,6 @@
 
 import type { FC } from "react";
 import { T } from "@/lib/tokens";
-import type { CursorRefs } from "@/lib/types";
-import { expandCursor, resetCursor } from "@/lib/cursor";
 import SectionLabel from "@/components/SectionLabel";
 
 const labelStyle = {
@@ -51,7 +49,7 @@ const ContactBg: FC = () => (
   </div>
 );
 
-const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
+const Contact: FC = () => (
   <section
     className="contact-section"
     id="contact"
@@ -105,7 +103,6 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
         <div style={{ display:"flex", flexDirection:"column", gap:"0.75rem" }}>
           <span style={labelStyle}>01 / Email</span>
           <a href="mailto:jiayun.lee@mail.utoronto.ca"
-            onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
             onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
             style={linkStyle}>
@@ -117,7 +114,6 @@ const Contact: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
           <span style={labelStyle}>02 / LinkedIn</span>
           <a href="https://www.linkedin.com/in/jjiayun-lee/"
             target="_blank" rel="noopener noreferrer"
-            onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
             onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
             style={linkStyle}>

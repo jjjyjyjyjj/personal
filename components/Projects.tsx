@@ -3,25 +3,21 @@
 import type { FC } from "react";
 import { T } from "@/lib/tokens";
 import { PROJECTS } from "@/lib/data";
-import type { CardData, CursorRefs } from "@/lib/types";
-import { expandCursor, resetCursor } from "@/lib/cursor";
+import type { CardData } from "@/lib/types";
 import SectionLabel from "./SectionLabel";
 
-const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({ card, index, cursor }) => {
+const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
   const displayIndex = String(index + 1).padStart(2, "0");
 
   const rowContent = (
     <div
       className="project-catalog-row"
-      onMouseEnter={() => expandCursor(cursor)}
-      onMouseLeave={() => resetCursor(cursor)}
       style={{
         display: "grid",
         gridTemplateColumns: "0.5fr 2.5fr 1.5fr",
         padding: "2rem 0",
         borderBottom: `1px solid ${T.grey}`,
         alignItems: "baseline",
-        cursor: card.link ? "pointer" : "default",
         transition: "background-color 0.4s ease, padding 0.4s ease",
       }}
       onMouseOver={(e) => {
@@ -78,12 +74,13 @@ const ProjectRow: FC<{ card: CardData; index: number; cursor: CursorRefs }> = ({
   );
 };
 
-const Projects: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
-  <section 
-    id="projects" 
-    style={{ 
-      padding: "6rem 10%", // Wider editorial margins
-      background: T.cream,
+const Projects: FC = () => {
+  return (
+    <section
+      id="projects"
+      style={{
+        padding: "6rem 10%", // Wider editorial margins
+        background: T.cream,
       minHeight: "100vh"
     }}
   >
@@ -119,13 +116,12 @@ const Projects: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
     {/* Catalog List Component */}
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       {PROJECTS.map((card, idx) => (
-        <ProjectRow key={card.id || idx} card={card} index={idx} cursor={cursor} />
+        <ProjectRow key={card.id || idx} card={card} index={idx} />
       ))}
     </div>
     <div style={{ marginTop: "3rem", fontFamily: "'Josefin Sans', sans-serif", fontSize: "1rem", letterSpacing: "0.2em", textTransform: "uppercase", color: T.grey }}>
       And more to come...
     </div>
   </section>
-);
-
+);}
 export default Projects;

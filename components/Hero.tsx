@@ -2,12 +2,10 @@
 
 import type { FC } from "react";
 import { T } from "@/lib/tokens";
-import type { CursorRefs } from "@/lib/types";
-import { expandCursor, resetCursor } from "@/lib/cursor";
 import { HeroPetals } from "@/components/Scales";
 import { useParallax } from "@/hooks/useParallax";
 
-const Hero: FC<{ cursor: CursorRefs }> = ({ cursor }) => {
+const Hero = () => {
   const scalesRef = useParallax(0.18);
   const textRef   = useParallax(0.08);
   return (
@@ -52,14 +50,12 @@ const Hero: FC<{ cursor: CursorRefs }> = ({ cursor }) => {
         </p>
         <div className="fade4 hero-buttons" style={{ marginTop:"3rem", display:"flex", gap:"1.5rem", alignItems:"center" }}>
           <a href="#projects"
-            onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = T.steelBlue; el.style.color = T.cream; el.style.transform = "translateY(-2px)"; }}
             onMouseOut={(e)  => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "none"; el.style.color = T.charcoal; el.style.transform = "none"; }}
             style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"1rem", fontWeight:400, letterSpacing:"0.3em", textTransform:"uppercase", padding:"1rem 2.5rem", border:`1px solid ${T.charcoal}`, backgroundColor:"none", color:T.charcoal, textDecoration:"none", transition:"background 0.3s, transform 0.2s, color 0.3s" }}>
             View Projects
           </a>
           <a href="#about"
-            onMouseEnter={() => expandCursor(cursor)} onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
             onMouseOut={(e)  => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.5"; }}
             style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"1rem", fontWeight:400, letterSpacing:"0.2em", textTransform:"uppercase", color:T.charcoal, textDecoration:"none", opacity:0.5, display:"flex", alignItems:"center", gap:"0.5rem", transition:"opacity 0.3s" }}>

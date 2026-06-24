@@ -7,7 +7,7 @@ import { NAV_LINKS } from "@/lib/data";
 import type { CursorRefs } from "@/lib/types";
 import { expandCursor, resetCursor } from "@/lib/cursor";
 
-const Nav: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
+const Nav:FC = () => (
   <nav
     style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
@@ -33,8 +33,6 @@ const Nav: FC<{ cursor: CursorRefs }> = ({ cursor }) => (
         <li key={name}>
           <a
             href={`#${name.toLowerCase()}`}
-            onMouseEnter={() => expandCursor(cursor)}
-            onMouseLeave={() => resetCursor(cursor)}
             onMouseOver={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
             onMouseOut={(e)  => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.6"; }}
             style={{
