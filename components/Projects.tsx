@@ -53,7 +53,6 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
         </span>
         {card.link && (
           <span style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.6rem", color:T.grey, opacity:0.6, letterSpacing:"0.1em" }}>
-            ↗
           </span>
         )}
       </div>

@@ -91,6 +91,8 @@ button, select, input, textarea {
 
   nav {
     padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
   }
 
   nav ul {
