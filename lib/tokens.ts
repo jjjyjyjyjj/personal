@@ -2,7 +2,7 @@ export const T = {
   ink:       "#0E0F0D",
   mauveDark: "#111113ff",
   charcoal:  "#1A1C1B",
-  steelBlue: "#8298a3ff",
+  steelBlue: "#72858fff",
   steelSoft: "#9BB5C5",
   steelPale: "#C7D9E3",
   grey:     "#312e2aff",
