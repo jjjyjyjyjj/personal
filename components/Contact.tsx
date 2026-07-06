@@ -99,19 +99,8 @@ const Contact: FC = () => (
         <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
           Direct Contacts
         </p>
-
-        <div style={{ display:"flex", flexDirection:"column", gap:"0.75rem" }}>
-          <span style={labelStyle}>01 / Email</span>
-          <a href="mailto:jiayun.lee@mail.utoronto.ca"
-            onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
-            onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
-            style={linkStyle}>
-            jiayun.lee@mail.utoronto.ca
-          </a>
-        </div>
-
         <div style={{ display:"flex", flexDirection:"column", width:"100%", gap:"0.75rem" }}>
-          <span style={labelStyle}>02 / LinkedIn</span>
+          <span style={labelStyle}>LinkedIn</span>
           <a href="https://www.linkedin.com/in/jjiayun-lee/"
             target="_blank" rel="noopener noreferrer"
             onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
