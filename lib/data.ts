@@ -30,12 +30,11 @@ export const PROJECTS: CardData[] = [
     link: "https://uofthrifts.dev/",
   },
   {
-    id: 3, title: "Miss WorldWide",
-    cat: "React, Javascript, Google Maps API", collection: "Co-developed a geodiscovery web app for Toronto residents featuring interactive Google Maps spatial filtering, custom event accessibility toggles, and a dynamic monthly event density bar chart.",
+    id: 3, title: "Security Scanner",
+    cat: "Typescript, OpenAI, Semgrep, Gitleaks", collection: " Built a VS Code extension that scans code for insecure patterns and exposed secrets before commit, helping developers catch vulnerabilities early.",
     bg: T.parchment,
-    link: "https://src-blue-zeta.vercel.app/",
+    link: "https://marketplace.visualstudio.com/items?itemName=jjjyjyjyjj.security-scanner",
   },
-
   {
     id: 4, title: "Virtual Memory Simulator",
     cat: "C", collection: "Built a virtual memory simulator featuring multi-level page tables, software-loaded TLBs, Copy-on-Write (CoW) optimizations, and modular page-replacement algorithms.",
@@ -47,15 +46,21 @@ export const PROJECTS: CardData[] = [
     bg: T.ivory,
     },
   {
-    id: 6, title: "Cooperative User-Level Thread Package ",
+    id: 5, title: "Cooperative User-Level Thread Package ",
     cat: "C",  collection: "Created a user-level x86-64 threading library with custom context-switching, an FCFS scheduler, and low-level stack manipulation for cooperative multitasking.",
     bg: "#1E2B35"
   },
   {
-    id: 7, title: "Pantry Pal",
+    id: 6, title: "Pantry Pal",
     cat: "Java",    collection: "Developed an recipe generator that integrates a third-party API to recommend personalized meals based on user ingredients, reducing manual data entry by 40%.",
     bg: "#D8CCBF",
     link:"https://github.com/jjjyjyjyjj/sexydevelopers",
+  },
+  {
+    id: 7, title: "Miss WorldWide",
+    cat: "React, Javascript, Google Maps API", collection: "Co-developed a geodiscovery web app for Toronto residents featuring interactive Google Maps spatial filtering, custom event accessibility toggles, and a dynamic monthly event density bar chart.",
+    bg: T.parchment,
+    link: "https://src-blue-zeta.vercel.app/",
   },
 ];
 
