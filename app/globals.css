@@ -14,15 +14,10 @@ body {
   color: #1A1C1B;
   font-family: var(--font-cormorant), 'Futura', sans-serif;
   overflow-x: hidden;
-  cursor: none;
 }
 
 a {
   text-decoration: none;
-}
-
-button, select, input, textarea {
-  cursor: none;
 }
 
 /* ── Keyframes ── */
@@ -80,15 +75,6 @@ button, select, input, textarea {
 
 /* ── Mobile responsive ── */
 @media (max-width: 768px) {
-  body {
-    cursor: auto;
-  }
-
-  .cursor,
-  .cursor-ring {
-    display: none;
-  }
-
   nav {
     padding: 1.2rem 1.5rem;
     display: flex;

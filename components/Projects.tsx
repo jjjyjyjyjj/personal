@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import type { FC } from "react";
 import { T } from "@/lib/tokens";
 import { PROJECTS } from "@/lib/data";
 import type { CardData } from "@/lib/types";
 import SectionLabel from "./SectionLabel";
+
+const PAGE_SIZE = 5;
 
 const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
   const displayIndex = String(index + 1).padStart(2, "0");
@@ -73,7 +76,59 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
   );
 };
 
+const PageButton: FC<{
+  label: string;
+  active?: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+  ariaLabel?: string;
+}> = ({ label, active = false, disabled = false, onClick, ariaLabel }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    disabled={disabled}
+    aria-label={ariaLabel ?? label}
+    aria-current={active ? "page" : undefined}
+    style={{
+      fontFamily: "'Josefin Sans', sans-serif",
+      fontSize: "0.8rem",
+      letterSpacing: "0.15em",
+      textTransform: "uppercase",
+      color: disabled ? T.grey : active ? T.cream : T.charcoal,
+      background: active ? T.charcoal : "transparent",
+      border: `1px solid ${active ? T.charcoal : T.grey}`,
+      padding: "0.5rem 0.9rem",
+      minWidth: "2.5rem",
+      cursor: disabled ? "default" : "pointer",
+      opacity: disabled ? 0.35 : 1,
+      transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease",
+    }}
+    onMouseOver={(e) => {
+      if (disabled || active) return;
+      e.currentTarget.style.backgroundColor = T.parchment;
+    }}
+    onMouseOut={(e) => {
+      if (disabled || active) return;
+      e.currentTarget.style.backgroundColor = "transparent";
+    }}
+  >
+    {label}
+  </button>
+);
+
 const Projects: FC = () => {
+  const [page, setPage] = useState(0);
+  const pageCount = Math.max(1, Math.ceil(PROJECTS.length / PAGE_SIZE));
+  const start = page * PAGE_SIZE;
+  const visible = PROJECTS.slice(start, start + PAGE_SIZE);
+
+  const goTo = (next: number) => {
+    const clamped = Math.min(Math.max(next, 0), pageCount - 1);
+    if (clamped === page) return;
+    setPage(clamped);
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section
       id="projects"
@@ -87,7 +142,6 @@ const Projects: FC = () => {
     
     {/* Editorial Header Section */}
     <div 
-      className="reveal" 
       style={{ 
         display: "flex", 
         flexDirection: "column",
@@ -114,13 +168,52 @@ const Projects: FC = () => {
 
     {/* Catalog List Component */}
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      {PROJECTS.map((card, idx) => (
-        <ProjectRow key={card.id || idx} card={card} index={idx} />
+      {visible.map((card, idx) => (
+        <ProjectRow key={card.id || start + idx} card={card} index={start + idx} />
       ))}
     </div>
-    <div style={{ marginTop: "3rem", fontFamily: "'Josefin Sans', sans-serif", fontSize: "1rem", letterSpacing: "0.2em", textTransform: "uppercase", color: T.grey }}>
-      And more to come...
-    </div>
+
+    {/* Pagination */}
+    {pageCount > 1 && (
+      <nav
+        aria-label="Projects pagination"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1rem",
+          marginTop: "2.5rem",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'Josefin Sans', sans-serif",
+            fontSize: "0.8rem",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: T.grey,
+          }}
+        >
+          {String(start + 1).padStart(2, "0")}&ndash;{String(start + visible.length).padStart(2, "0")} of{" "}
+          {String(PROJECTS.length).padStart(2, "0")}
+        </span>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <PageButton label="Prev" disabled={page === 0} onClick={() => goTo(page - 1)} ariaLabel="Previous page" />
+          {Array.from({ length: pageCount }, (_, i) => (
+            <PageButton
+              key={i}
+              label={String(i + 1)}
+              active={i === page}
+              onClick={() => goTo(i)}
+              ariaLabel={`Page ${i + 1}`}
+            />
+          ))}
+          <PageButton label="Next" disabled={page === pageCount - 1} onClick={() => goTo(page + 1)} ariaLabel="Next page" />
+        </div>
+      </nav>
+    )}
   </section>
 );}
 export default Projects;

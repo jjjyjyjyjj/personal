@@ -9,10 +9,9 @@ export const T = {
   greyDark: "#23201dff",
   parchment: "#E8DED0",
   ivory:     "#F4EEE5",
-  mauve:     "#9E8593",
-  sepia:     "#6B5548",
-  cream:     "#FAF7F3",
-  mauvePale: "#C8B8C0",
+  mauve:     "#9E8593", // not needed?
+  sepia:     "#6B5548", //change
+  cream:     "#FAF7F3" // change
 } as const;
 
 export type Token = keyof typeof T;

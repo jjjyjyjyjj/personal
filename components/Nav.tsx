@@ -4,8 +4,6 @@ import type { FC } from "react";
 import Link from "next/link";
 import { T } from "@/lib/tokens";
 import { NAV_LINKS } from "@/lib/data";
-import type { CursorRefs } from "@/lib/types";
-import { expandCursor, resetCursor } from "@/lib/cursor";
 
 const Nav:FC = () => (
   <nav
