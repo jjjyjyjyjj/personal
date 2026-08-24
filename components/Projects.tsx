@@ -1,13 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import type { FC } from "react";
+import type { CSSProperties, FC } from "react";
 import { T } from "@/lib/tokens";
 import { PROJECTS } from "@/lib/data";
 import type { CardData } from "@/lib/types";
+import { interactive } from "@/lib/hover";
 import SectionLabel from "./SectionLabel";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 4;
+
+const catalogRow: CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "0.5fr 2.5fr 1.5fr",
+  padding: "2rem 0",
+  borderBottom: `1px solid ${T.normalFont}`,
+  alignItems: "baseline",
+  transition: "background-color 0.4s ease, padding 0.4s ease",
+};
+
+const catalogRowHover: CSSProperties = {
+  backgroundColor: T.hoverRow,
+  paddingLeft: "1rem",
+  paddingRight: "1rem",
+};
 
 const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
   const displayIndex = String(index + 1).padStart(2, "0");
@@ -15,24 +31,7 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
   const rowContent = (
     <div
       className="project-catalog-row"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "0.5fr 2.5fr 1.5fr",
-        padding: "2rem 0",
-        borderBottom: `1px solid ${T.grey}`,
-        alignItems: "baseline",
-        transition: "background-color 0.4s ease, padding 0.4s ease",
-      }}
-      onMouseOver={(e) => {
-        e.currentTarget.style.backgroundColor = T.parchment;
-        e.currentTarget.style.paddingLeft = "1rem";
-        e.currentTarget.style.paddingRight = "1rem";
-      }}
-      onMouseOut={(e) => {
-        e.currentTarget.style.backgroundColor = "transparent";
-        e.currentTarget.style.paddingLeft = "0px";
-        e.currentTarget.style.paddingRight = "0px";
-      }}
+      {...interactive(catalogRow, catalogRowHover)}
     >
       {/* Column 1: Index */}
       <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"0.95rem", fontWeight:400, color:T.grey, letterSpacing:"0.1em" }}>
@@ -41,17 +40,17 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
 
       {/* Column 2: Title & collection */}
       <div className="projects-section" style={{ display:"flex", flexDirection:"column", gap:"0.25rem" }}>
-        <h3 style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1.65rem", fontWeight:400, color:T.charcoal, margin:0, lineHeight:1.2 }}>
+        <h3 style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1.65rem", fontWeight:400, color:T.normalFont, margin:0, lineHeight:1.2 }}>
           {card.title}
         </h3>
-        <p style={{ fontFamily:"var(--font-josefin)", fontSize:"1rem", color:T.greyDark, margin:0 }}>
+        <p style={{ fontFamily:"var(--font-josefin)", fontSize:"1rem", color:T.subFont, margin:0 }}>
           {card.collection || "Selected Works"}
         </p>
       </div>
 
       {/* Column 3: Category + link arrow */}
       <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginLeft:"2.4rem" }}>
-        <span className="project-cat-col" style={{ fontFamily:"var(--font-josefin)", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.steelBlue }}>
+        <span className="project-cat-col" style={{ fontFamily:"var(--font-josefin)", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.detail}}>
           {card.cat}
         </span>
         {card.link && (
@@ -82,39 +81,38 @@ const PageButton: FC<{
   disabled?: boolean;
   onClick: () => void;
   ariaLabel?: string;
-}> = ({ label, active = false, disabled = false, onClick, ariaLabel }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    disabled={disabled}
-    aria-label={ariaLabel ?? label}
-    aria-current={active ? "page" : undefined}
-    style={{
-      fontFamily: "var(--font-josefin)",
-      fontSize: "0.8rem",
-      letterSpacing: "0.15em",
-      textTransform: "uppercase",
-      color: disabled ? T.grey : active ? T.cream : T.charcoal,
-      background: active ? T.charcoal : "transparent",
-      border: `1px solid ${active ? T.charcoal : T.grey}`,
-      padding: "0.5rem 0.9rem",
-      minWidth: "2.5rem",
-      cursor: disabled ? "default" : "pointer",
-      opacity: disabled ? 0.35 : 1,
-      transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease",
-    }}
-    onMouseOver={(e) => {
-      if (disabled || active) return;
-      e.currentTarget.style.backgroundColor = T.parchment;
-    }}
-    onMouseOut={(e) => {
-      if (disabled || active) return;
-      e.currentTarget.style.backgroundColor = "transparent";
-    }}
-  >
-    {label}
-  </button>
-);
+}> = ({ label, active = false, disabled = false, onClick, ariaLabel }) => {
+  // Resting style depends on state, so it is built per render and handed to
+  // interactive() — the revert always reads back from this same object.
+  const base: CSSProperties = {
+    fontFamily: "var(--font-josefin)",
+    fontSize: "0.8rem",
+    letterSpacing: "0.15em",
+    textTransform: "uppercase",
+    color: disabled ? T.grey : active ? T.accentFont : T.normalFont,
+    backgroundColor: active ? T.normalFont : "transparent",
+    border: `1px solid ${active ? T.normalFont : T.grey}`,
+    borderRadius: "5px",
+    padding: "0.5rem 0.9rem",
+    minWidth: "2.5rem",
+    cursor: disabled ? "default" : "pointer",
+    opacity: disabled ? 0.35 : 1,
+    transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease",
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel ?? label}
+      aria-current={active ? "page" : undefined}
+      {...interactive(base, { backgroundColor: T.hoverRow}, !disabled && !active)}
+    >
+      {label}
+    </button>
+  );
+};
 
 const Projects: FC = () => {
   const [page, setPage] = useState(0);
@@ -133,12 +131,11 @@ const Projects: FC = () => {
     <section
       id="projects"
       style={{
-        padding: "6rem 10%", // Wider editorial margins
-        background: T.cream,
-      minHeight: "100vh"
+        padding: "clamp(4rem, 10vh, 6rem) clamp(1.25rem, 8vw, 10%)",
+      minHeight: "100svh"
     }}
   >
-    <SectionLabel>Projects</SectionLabel>
+    <SectionLabel>Projects.</SectionLabel>
     
     {/* Editorial Header Section */}
     <div 
@@ -146,23 +143,20 @@ const Projects: FC = () => {
         display: "flex", 
         flexDirection: "column",
         alignItems: "flex-start", 
-        paddingBottom: "2rem",
-        marginBottom: "1rem",
-        borderBottom: `2px solid ${T.charcoal}`
+        paddingBottom: "1rem",
+        borderBottom: `2px solid ${T.normalFont}`
       }}
     >
       <h2 
         style={{ 
           fontFamily:"'Helvetica Neue', sans-serif",
           fontSize: "clamp(3rem, 5vw, 3.5rem)", 
-          fontWeight: 900, 
-          color: T.charcoal, 
+          fontWeight: 600, 
+          color: T.normalFont, 
           lineHeight: 1.0,
-          margin: 0,
-          letterSpacing:"-0.08em"
         }}
       >
-        Collection of my Past Works
+        Collection of Past Work
       </h2>
     </div>
 
@@ -183,7 +177,7 @@ const Projects: FC = () => {
           alignItems: "center",
           justifyContent: "space-between",
           gap: "1rem",
-          marginTop: "2.5rem",
+          marginTop: "1.5rem",
         }}
       >
         <span
@@ -192,7 +186,7 @@ const Projects: FC = () => {
             fontSize: "0.8rem",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: T.grey,
+            color: T.normalFont
           }}
         >
           {String(start + 1).padStart(2, "0")}&ndash;{String(start + visible.length).padStart(2, "0")} of{" "}

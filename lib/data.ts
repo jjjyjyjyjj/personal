@@ -1,6 +1,6 @@
 import type { CardData } from "./types";
 
-export const NAV_LINKS = ["Projects", "About", "Contact"] as const;
+export const NAV_LINKS = ["About", "Projects",  "Contact"] as const;
 
 export const FOOTER_LINKS = ["Back to Top"] as const;
 

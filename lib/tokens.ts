@@ -9,9 +9,13 @@ export const T = {
   ivory:     "#F4EEE5",
   cream:     "#FAF7F3",
   nav: "#2D2220",
-  bg: "#DBD3CF",
-  accentFont: "F2EFEB",
+  accentFont: "#F2EFEB",
   normalFont:"#2D2220",
   footer:"#BAACA4",
-  footerFont: "#4B4439"
+  footerFont: "#4B4439",
+  hoverFont:"#D9C8B3",
+  darkHoverFont:"#2D2220",
+  detail:"#886467",
+  subFont:"#72695D",
+  hoverRow:"#e7dcd9ff"
 } as const;

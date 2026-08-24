@@ -4,14 +4,12 @@ import { T } from "@/lib/tokens";
 const SectionLabel: FC<{ children: ReactNode }> = ({ children }) => (
   <p
     style={{
-      fontFamily: "var(--font-josefin)",
-      fontSize: "1.2rem", fontWeight: 500, letterSpacing: "0.4em",
-      textTransform: "uppercase", color: T.steelBlue,
+      fontFamily: "var(--font-inter)",
+      fontSize: "1.2rem", fontWeight: 500, letterSpacing: "0.2em",
+      textTransform: "uppercase", color: T.normalFont,
       marginBottom: "2rem",
       display: "flex", alignItems: "center", gap: "1rem",
-    }}
-  >
-    <span style={{ display: "block", width: "2rem", height: 1, background: T.steelBlue }} />
+    }}>
     {children}
   </p>
 );

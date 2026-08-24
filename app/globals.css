@@ -1,3 +1,10 @@
+:root {
+  --ground: #DBD3CF;
+  --lace: url("/lace-background.jpeg");
+  --lace-scale: 420px;
+  --lace-strength: 0.04;
+}
+
 /* ── Reset ── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -5,15 +12,37 @@
   padding: 0;
 }
 
+/* background-color on html too, so overscroll shows the same ground. */
 html {
   scroll-behavior: smooth;
+  background-color: var(--ground);
 }
 
 body {
-  background: #FAFAFA;
+  background: transparent;
   color: #1A1C1B;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--font-inter), 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+}
+
+/* Lace texture laid over the flat ground.
+   The source art is black on white, so the layer is multiplied against the
+   ground colour: white areas resolve to exactly var(--ground) and only the
+   black threads survive. Low opacity then fades those threads without
+   shifting the base colour. Fixed, so it reads as one continuous sheet
+   behind the page instead of restarting at every section. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--ground);
+  background-image: var(--lace);
+  background-repeat: repeat;
+  background-size: var(--lace-scale);
+  background-blend-mode: multiply;
+  opacity: var(--lace-strength);
 }
 
 a {
@@ -56,16 +85,46 @@ a {
   animation: marquee 28s linear infinite;
 }
 
+/* ── Tablet / small laptop ──
+   The two-column splits get cramped well before the phone breakpoint, so
+   they stack here while keeping their imagery. !important is needed because
+   the grid columns are set inline on the components. */
+@media (max-width: 1024px) {
+  .hero-section,
+  .about-grid,
+  .contact-grid-wrap {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-right-panel,
+  .about-image-col {
+    min-height: 42svh;
+  }
+
+  .hero-section {
+    min-height: auto !important;
+  }
+
+  .about-text-col {
+    min-height: auto !important;
+  }
+
+  .contact-right-col {
+    border-left: none !important;
+    padding: 2rem 0 !important;
+  }
+}
+
 /* ── Mobile responsive ── */
 @media (max-width: 768px) {
   nav {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem 1.25rem !important;
     display: flex;
     justify-content: space-between;
   }
 
   nav ul {
-    gap: 1.2rem;
+    gap: 1rem !important;
   }
 
   .hero-section, .contact-section {
@@ -73,12 +132,21 @@ a {
     min-height: auto !important;
   }
 
-  .hero-right-panel, .hero-buttons, .hero-lang-card{
+  .hero-lang-card {
     display: none !important;
   }
+
+  .hero-right-panel {
+    min-height: 45svh;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+  }
   .hero-left-panel {
-    padding: 7rem 2rem 4rem 2rem !important;
-    min-height: 100vh;
+    padding: 7rem 2rem 2.5rem 2rem !important;
+    /* No min-height here. It used to be 100svh, which reserved a whole screen
+       for ~220px of centred text and pushed the image below the fold. */
   }
 
   .hero-lang-card {

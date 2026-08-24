@@ -1,23 +1,25 @@
 "use client";
 
 import type { FC } from "react";
+import type { CSSProperties } from "react";
 import { T } from "@/lib/tokens";
+import { interactive } from "@/lib/hover";
 import SectionLabel from "@/components/SectionLabel";
 
 const labelStyle = {
-  fontFamily: "var(--font-josefin)",
+  fontFamily: "var(--font-inter)",
   fontSize: "0.7rem",
   letterSpacing: "0.35em",
   textTransform: "uppercase" as const,
-  color: T.greyDark,
+  color: T.normalFont,
 };
 
-const linkStyle = {
-  fontFamily:"var(--font-josefin)",
+const linkStyle: CSSProperties = {
+  fontFamily:"var(--font-inter)",
   fontSize: "clamp(1.5rem, 2.5vw, 1rem)",
   fontWeight: 300,
   fontStyle: "italic",
-  color: T.charcoal,
+  color: T.subFont,
   textDecoration: "none",
   paddingBottom: "0.5rem",
   display: "inline-block",
@@ -25,36 +27,14 @@ const linkStyle = {
   transition: "all 0.4s ease",
 };
 
-/* ── Background decoration ───────────────────────────────────────────── */
-const ContactBg: FC = () => (
-  <div style={{ position:"absolute", inset:0, overflow:"hidden", pointerEvents:"none", userSelect:"none" }}>
-
-    {/* large ghost word — bottom left anchor */}
-    <span style={{
-      position: "absolute",
-      bottom: "-4rem",
-      left: "-2rem",
-      fontFamily: "'Helvetica Neue', sans-serif",
-      fontSize: "clamp(10rem, 22vw, 20rem)",
-      fontWeight: 600,
-      fontStyle: "italic",
-      color: T.grey,
-      opacity: 0.07,
-      lineHeight: 1,
-      letterSpacing: "-0.03em",
-      whiteSpace: "nowrap",
-    }}>
-      connect
-    </span>
-  </div>
-);
+const linkHover: CSSProperties = { color: T.detail, paddingLeft: "0.5rem" };
 
 const Contact: FC = () => (
   <section
     className="contact-section"
     id="contact"
     style={{
-      padding: "10rem 10%",
+      padding: "0rem clamp(1.25rem, 8vw, 10%)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -63,10 +43,9 @@ const Contact: FC = () => (
       position: "relative",  
     }}
   >
-    <ContactBg />
 
     <div
-      className="reveal"
+      className="reveal contact-grid-wrap"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -79,36 +58,36 @@ const Contact: FC = () => (
     >
       {/* ── Left Column ── */}
       <div className="contact-grid" style={{ display:"flex", flexDirection:"column" }}>
-        <SectionLabel>Contact</SectionLabel>
-        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:900, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.07em", margin:"2rem 0", fontFamily:"'Helvetica Neue', sans-serif", }}>
+        <SectionLabel>Contact.</SectionLabel>
+        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:600, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.07em", margin:"2rem 0", fontFamily:"var(--font-inter)", }}>
           Let&apos;s <br />
-          <span style={{ fontStyle:"italic", paddingLeft:"1.5rem" }}>connect.</span>
+          <span style={{ fontStyle:"italic", paddingLeft:"1.5rem" }}>connect</span>
         </h2>
-        <p style={{ fontSize:"1.1rem", fontWeight:300, lineHeight:1.8, color:T.greyDark, maxWidth:"24rem", fontFamily:"'Helvetica Neue', sans-serif" }}>
+        <p style={{ fontSize:"1.1rem", fontWeight:300, lineHeight:1.8, color:T.footerFont, maxWidth:"24rem", fontFamily:"var(--font-inter)" }}>
           Whether you have an interesting project idea, or just want to chat, feel free to reach out!<br />
           I&apos;m always open to new connections and opportunities.
         </p>
-      </div>
 
-      {/* ── Right Column ── */}
-      <div
+        <div
         className="contact-right-col"
-        style={{ borderLeft:`2px solid ${T.grey}`, padding:"5rem 4rem", width:"100%", display:"flex", flexDirection:"column", gap:"3.5rem" }}
+        style={{ padding:"0rem 4rem", width:"100%", display:"flex", flexDirection:"column", gap:"3.5rem" }}
       >
-        <p style={{ fontFamily:"var(--font-josefin)", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
+        {/* <p style={{ fontFamily:"var(--font-inter)", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
           Direct Contacts
-        </p>
-        <div style={{ display:"flex", flexDirection:"column", width:"100%", gap:"0.75rem" }}>
+        </p> */}
+        <div style={{ paddingTop: "2rem", display:"flex", flexDirection:"column", width:"100%", gap:"0.75rem" }}>
           <span style={labelStyle}>LinkedIn</span>
           <a href="https://www.linkedin.com/in/jjiayun-lee/"
             target="_blank" rel="noopener noreferrer"
-            onMouseOver={(e) => { e.currentTarget.style.color = T.steelBlue; e.currentTarget.style.paddingLeft = "0.5rem"; }}
-            onMouseOut={(e)  => { e.currentTarget.style.color = T.grey;     e.currentTarget.style.paddingLeft = "0rem"; }}
-            style={linkStyle}>
+            {...interactive(linkStyle, linkHover)}>
             linkedin.com/in/jjiayun-lee
           </a>
         </div>
       </div>
+      </div>
+
+      {/* ── Right Column ── */}
+      
     </div>
   </section>
 );
