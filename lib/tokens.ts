@@ -8,6 +8,10 @@ export const T = {
   parchment: "#E8DED0",
   ivory:     "#F4EEE5",
   cream:     "#FAF7F3",
+  nav: "#2D2220",
+  bg: "#DBD3CF",
+  accentFont: "F2EFEB",
+  normalFont:"#2D2220",
+  footer:"#BAACA4",
+  footerFont: "#4B4439"
 } as const;
-
-export type Token = keyof typeof T;

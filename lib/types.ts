@@ -3,6 +3,5 @@ export interface CardData {
   title:      string;
   cat:        string;
   collection: string;
-  bg:         string;
   link?:      string;
 }

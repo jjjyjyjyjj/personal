@@ -5,7 +5,7 @@ import { T } from "@/lib/tokens";
 import SectionLabel from "@/components/SectionLabel";
 
 const labelStyle = {
-  fontFamily: "'Josefin Sans', sans-serif",
+  fontFamily: "var(--font-josefin)",
   fontSize: "0.7rem",
   letterSpacing: "0.35em",
   textTransform: "uppercase" as const,
@@ -13,7 +13,7 @@ const labelStyle = {
 };
 
 const linkStyle = {
-  fontFamily:"'Josefin Sans', sans-serif",
+  fontFamily:"var(--font-josefin)",
   fontSize: "clamp(1.5rem, 2.5vw, 1rem)",
   fontWeight: 300,
   fontStyle: "italic",
@@ -54,7 +54,6 @@ const Contact: FC = () => (
     className="contact-section"
     id="contact"
     style={{
-      // background: T.parchment,
       padding: "10rem 10%",
       display: "flex",
       flexDirection: "column",
@@ -96,7 +95,7 @@ const Contact: FC = () => (
         className="contact-right-col"
         style={{ borderLeft:`2px solid ${T.grey}`, padding:"5rem 4rem", width:"100%", display:"flex", flexDirection:"column", gap:"3.5rem" }}
       >
-        <p style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
+        <p style={{ fontFamily:"var(--font-josefin)", fontSize:"0.7rem", fontWeight:400, letterSpacing:"0.4em", textTransform:"uppercase", color:T.charcoal, borderBottom:`2px solid ${T.grey}`, paddingBottom:"1rem", margin:0 }}>
           Direct Contacts
         </p>
         <div style={{ display:"flex", flexDirection:"column", width:"100%", gap:"0.75rem" }}>

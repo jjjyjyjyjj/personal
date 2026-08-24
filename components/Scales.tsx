@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FC } from "react";
-import { T } from "@/lib/tokens";
 
 /* ─── Single scale ────────────────────────────────────────────────────── */
 interface ScaleProps {
@@ -105,12 +104,6 @@ const heroColor = (col: number, _row: number, cols: number): { fill: string; str
   return { fill: fills[idx], stroke: "#2A2820" };
 };
 
-const aboutColor = (col: number, _row: number, cols: number): { fill: string; stroke: string } => {
-  const t = col / Math.max(cols - 1, 1);
-  const fills = ["#8A7A68", "#A09080", "#B8AA98", "#CEC2B0", "#E0D8CC", "#EEE8E0"];
-  const idx = Math.min(Math.floor(t * fills.length), fills.length - 1);
-  return { fill: fills[idx], stroke: "#6A5A48" };
-};
 
 /* ─── HeroPetals ──────────────────────────────────────────────────────── */
 export const HeroPetals: FC = () => (
@@ -137,20 +130,3 @@ export const HeroPetals: FC = () => (
   </svg>
 );
 
-/* ─── AboutPetals ─────────────────────────────────────────────────────── */
-export const AboutPetals: FC = () => (
-  <svg
-    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "hidden" }}
-    viewBox="0 0 600 700"
-    preserveAspectRatio="xMidYMid slice"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <ScaleGrid
-      cols={12} rows={25}
-      scaleW={52} scaleH={46}
-      offsetX={4} offsetY={20}
-      prefix="a"
-      colorFn={aboutColor}
-    />
-  </svg>
-);

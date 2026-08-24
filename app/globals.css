@@ -12,7 +12,7 @@ html {
 body {
   background: #FAFAFA;
   color: #1A1C1B;
-  font-family: var(--font-cormorant), 'Futura', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
 
@@ -54,23 +54,6 @@ a {
   display: flex;
   white-space: nowrap;
   animation: marquee 28s linear infinite;
-}
-
-/* ── Work card hover ── */
-.work-card:hover .card-bg {
-  transform: scale(1.04);
-}
-.work-card:hover .card-overlay {
-  opacity: 1 !important;
-}
-
-/* ── Service row hover ── */
-.service-row:hover {
-  padding-left: 1rem;
-}
-.service-row:hover .svc-arrow {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
 }
 
 /* ── Mobile responsive ── */

@@ -33,7 +33,7 @@ const Nav:FC = () => (
             href={`#${name.toLowerCase()}`}
             onMouseOut={(e)  => { const el = e.currentTarget as HTMLAnchorElement; el.style.opacity = "0.6"; el.style.color = T.charcoal; }}
             style={{
-              fontFamily: "'Josefin Sans', sans-serif",
+              fontFamily: "var(--font-josefin)",
               fontSize: "0.8rem", fontWeight: 400, letterSpacing: "0.25em",
               textTransform: "uppercase", color: T.charcoal,
               textDecoration: "none", opacity: 0.6, transition: "opacity 0.3s, color 0.3s",

@@ -44,18 +44,18 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
         <h3 style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1.65rem", fontWeight:400, color:T.charcoal, margin:0, lineHeight:1.2 }}>
           {card.title}
         </h3>
-        <p style={{ fontFamily:"'Josefin Sans', sans-serif", fontSize:"1rem", color:T.greyDark, margin:0 }}>
+        <p style={{ fontFamily:"var(--font-josefin)", fontSize:"1rem", color:T.greyDark, margin:0 }}>
           {card.collection || "Selected Works"}
         </p>
       </div>
 
       {/* Column 3: Category + link arrow */}
       <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginLeft:"2.4rem" }}>
-        <span className="project-cat-col" style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.steelBlue }}>
+        <span className="project-cat-col" style={{ fontFamily:"var(--font-josefin)", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.steelBlue }}>
           {card.cat}
         </span>
         {card.link && (
-          <span style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"0.6rem", color:T.grey, opacity:0.6, letterSpacing:"0.1em" }}>
+          <span style={{ fontFamily:"var(--font-josefin)", fontSize:"0.6rem", color:T.grey, opacity:0.6, letterSpacing:"0.1em" }}>
           </span>
         )}
       </div>
@@ -90,7 +90,7 @@ const PageButton: FC<{
     aria-label={ariaLabel ?? label}
     aria-current={active ? "page" : undefined}
     style={{
-      fontFamily: "'Josefin Sans', sans-serif",
+      fontFamily: "var(--font-josefin)",
       fontSize: "0.8rem",
       letterSpacing: "0.15em",
       textTransform: "uppercase",
@@ -188,7 +188,7 @@ const Projects: FC = () => {
       >
         <span
           style={{
-            fontFamily: "'Josefin Sans', sans-serif",
+            fontFamily: "var(--font-josefin)",
             fontSize: "0.8rem",
             letterSpacing: "0.15em",
             textTransform: "uppercase",

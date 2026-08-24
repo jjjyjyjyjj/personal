@@ -11,7 +11,7 @@ const Marquee: FC = () => {
           <span
             key={i}
             style={{
-              fontFamily: "'Josefin Sans', sans-serif",
+              fontFamily: "var(--font-josefin)",
               fontSize: "0.8rem", fontWeight: 400, letterSpacing: "0.35em",
               textTransform: "uppercase", color: T.parchment,
               padding: "0 3rem", flexShrink: 0, opacity: 0.7,

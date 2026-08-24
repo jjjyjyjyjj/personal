@@ -16,7 +16,7 @@ const Footer: FC = () => (
           href="#"
           onMouseOver={(e)  => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
           onMouseOut={(e)   => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.5"; }}
-          style={{ fontFamily:"'Josefin Sans',sans-serif", fontSize:"1rem", fontWeight:800, letterSpacing:"0.25em", textTransform:"uppercase", color:T.parchment, textDecoration:"none", opacity:0.5, transition:"opacity 0.3s" }}
+          style={{ fontFamily:"var(--font-josefin)", fontSize:"1rem", fontWeight:700, letterSpacing:"0.25em", textTransform:"uppercase", color:T.parchment, textDecoration:"none", opacity:0.5, transition:"opacity 0.3s" }}
         >
           {link}
         </a>

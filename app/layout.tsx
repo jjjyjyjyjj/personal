@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
+import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
+
+// Self-hosted at build time — no request to fonts.googleapis.com, no FOUT.
+// 200–700 covers every weight the components actually ask for.
+const josefin = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-josefin",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Jiayun Lee",
@@ -8,15 +18,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={josefin.variable}>
       <body>{children}</body>
     </html>
   );
