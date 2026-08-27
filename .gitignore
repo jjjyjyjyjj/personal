@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Full-resolution source artwork — kept out of public/ so it never deploys
+/source-art

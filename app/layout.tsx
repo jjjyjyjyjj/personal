@@ -30,6 +30,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${josefin.variable}`}>
+      <head>
+        {/* Arms the scroll-reveal before first paint, so nothing flashes in
+            and back out. The timer is the failsafe: useReveal clears it on
+            mount, so if React never hydrates the class is dropped and every
+            .reveal section becomes visible instead of staying blank. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js-reveal');" +
+              "window.__revealFailsafe=setTimeout(function(){" +
+              "document.documentElement.classList.remove('js-reveal')},3000);",
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

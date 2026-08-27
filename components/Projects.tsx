@@ -37,8 +37,6 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
       <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"0.95rem", fontWeight:400, color:T.grey, letterSpacing:"0.1em" }}>
         {displayIndex}
       </span>
-
-      {/* Column 2: Title & collection */}
       <div className="projects-section" style={{ display:"flex", flexDirection:"column", gap:"0.25rem" }}>
         <h3 style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1.65rem", fontWeight:400, color:T.normalFont, margin:0, lineHeight:1.2 }}>
           {card.title}
@@ -48,7 +46,6 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
         </p>
       </div>
 
-      {/* Column 3: Category + link arrow */}
       <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginLeft:"2.4rem" }}>
         <span className="project-cat-col" style={{ fontFamily:"var(--font-josefin)", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:T.detail}}>
           {card.cat}
@@ -61,7 +58,6 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
     </div>
   );
 
-  // if there's a link, wrap in <a>; otherwise render as-is
   return card.link ? (
     <a href={card.link}
       target="_blank"
@@ -82,8 +78,6 @@ const PageButton: FC<{
   onClick: () => void;
   ariaLabel?: string;
 }> = ({ label, active = false, disabled = false, onClick, ariaLabel }) => {
-  // Resting style depends on state, so it is built per render and handed to
-  // interactive() — the revert always reads back from this same object.
   const base: CSSProperties = {
     fontFamily: "var(--font-josefin)",
     fontSize: "0.8rem",
@@ -132,7 +126,7 @@ const Projects: FC = () => {
       id="projects"
       style={{
         padding: "clamp(4rem, 10vh, 6rem) clamp(1.25rem, 8vw, 10%)",
-      minHeight: "100svh"
+        minHeight: "100svh"
     }}
   >
     <SectionLabel>Projects.</SectionLabel>
@@ -159,15 +153,12 @@ const Projects: FC = () => {
         Collection of Past Work
       </h2>
     </div>
-
-    {/* Catalog List Component */}
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       {visible.map((card, idx) => (
         <ProjectRow key={card.id || start + idx} card={card} index={start + idx} />
       ))}
     </div>
 
-    {/* Pagination */}
     {pageCount > 1 && (
       <nav
         aria-label="Projects pagination"

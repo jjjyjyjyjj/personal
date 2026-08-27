@@ -18,7 +18,7 @@ const Site: FC = () => {
       <Nav      />
       <main>
         <Hero       />
-        <Marquee />
+        {/* <Marquee /> */}
         <About />
         <Projects   />
         <Contact    />
