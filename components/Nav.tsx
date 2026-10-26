@@ -8,7 +8,7 @@ import { NAV_LINKS } from "@/lib/data";
 
 const navLink: CSSProperties = {
   fontFamily: "var(--font-inter)",
-  fontSize: "0.8rem",
+  fontSize: "0.9rem",
   fontWeight: 400,
   letterSpacing: "0.25em",
   textTransform: "uppercase",
