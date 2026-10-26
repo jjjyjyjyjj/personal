@@ -43,37 +43,34 @@ const DOODLES = [
 ] as const;
 
 const Contact: FC = () => (
-  <section
-    className="contact-section"
-    id="contact"
+  <div
+    className="contact-section page-fill"
     style={{
-      padding: "1rem clamp(1.25rem, 8vw, 10%)",
+      padding: "clamp(1.5rem, 5vh, 3.5rem) clamp(1.25rem, 8vw, 10%) clamp(1rem, 3vh, 2rem)",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      maxHeight: "100vh",
-      position: "relative", 
-      marginTop:"2rem"
+      position: "relative",
     }}
   >
 
     <div
-      className="reveal contact-grid-wrap"
+      className="contact-grid-wrap"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: "3rem",
         width: "100%",
-        alignItems: "start",
+        alignItems: "stretch",
+        flex: 1,
+        minHeight: 0,
         position: "relative", 
         zIndex: 1,
       }}
     >
       {/* Left Column */}
       <div className="contact-grid" style={{ display:"flex", flexDirection:"column" }}>
-        <SectionLabel>Contact.</SectionLabel>
-        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:600, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.07em", margin:"2rem 0", fontFamily:"var(--font-inter)", }}>
+        <SectionLabel folio="p. 04">Contact.</SectionLabel>
+        <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:500, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.03em", margin:"1rem 0 2rem", fontFamily:"var(--font-serif)", }}>
           Let&apos;s <br />
           <span style={{ fontStyle:"italic", paddingLeft:"1.5rem" }}>connect</span>
         </h2>
@@ -94,11 +91,12 @@ const Contact: FC = () => (
        {/* Right Column */}
       <div
         className="parallax-wrap contact-right-col"
-        style={{ position:"relative", width:"100%", paddingLeft: "10px", borderLeft:`1px solid ${T.normalFont}`, overflow:"hidden", height:"600px" }}
+        style={{ position:"relative", width:"100%", paddingLeft: "10px", borderLeft:`1px solid ${T.normalFont}`, overflow:"hidden", minHeight:0 }}
       >
         {DOODLES.map((d, i) => (
           <img
             key={`${d.src}-${i}`}
+            className="doodle"
             src={d.src}
             alt={d.alt}
             style={{
@@ -113,7 +111,7 @@ const Contact: FC = () => (
         ))}
        </div>
     </div>
-  </section>
+  </div>
 );
 
 export default Contact;

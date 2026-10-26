@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Josefin_Sans } from "next/font/google";
+import { Inter, Josefin_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 // Self-hosted at build time — no request to fonts.googleapis.com, no FOUT.
@@ -22,6 +22,14 @@ const josefin = Josefin_Sans({
   display: "swap",
 });
 
+// Magazine display face for mastheads and headlines. Variable, both styles.
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Jiayun Lee",
   description: "My personal website",
@@ -29,18 +37,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${josefin.variable}`}>
+    // The head script sets data-theme before React hydrates.
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${josefin.variable} ${playfair.variable}`}>
       <head>
-        {/* Arms the scroll-reveal before first paint, so nothing flashes in
-            and back out. The timer is the failsafe: useReveal clears it on
-            mount, so if React never hydrates the class is dropped and every
-            .reveal section becomes visible instead of staying blank. */}
+        {/* Applies a saved light/dark choice before paint; none → follow the OS. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('js-reveal');" +
-              "window.__revealFailsafe=setTimeout(function(){" +
-              "document.documentElement.classList.remove('js-reveal')},3000);",
+              "try{var t=localStorage.getItem('theme');" +
+              "if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}",
           }}
         />
       </head>

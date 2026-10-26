@@ -8,12 +8,12 @@ import type { CardData } from "@/lib/types";
 import { interactive } from "@/lib/hover";
 import SectionLabel from "./SectionLabel";
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 3;
 
 const catalogRow: CSSProperties = {
   display: "grid",
   gridTemplateColumns: "0.5fr 2.5fr 1.5fr",
-  padding: "2rem 0",
+  padding: "clamp(0.75rem, 2.2vh, 1.75rem) 0",
   borderBottom: `1px solid ${T.normalFont}`,
   alignItems: "baseline",
   transition: "background-color 0.4s ease, padding 0.4s ease",
@@ -34,11 +34,11 @@ const ProjectRow: FC<{ card: CardData; index: number}> = ({ card, index}) => {
       {...interactive(catalogRow, catalogRowHover)}
     >
       {/* Column 1: Index */}
-      <span style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"0.95rem", fontWeight:400, color:T.grey, letterSpacing:"0.1em" }}>
+      <span style={{ fontFamily:"var(--font-serif)", fontStyle:"italic", fontSize:"2rem", fontWeight:400, color:T.detail, lineHeight:1 }}>
         {displayIndex}
       </span>
       <div className="projects-section" style={{ display:"flex", flexDirection:"column", gap:"0.25rem" }}>
-        <h3 style={{ fontFamily:"'Helvetica Neue', sans-serif", fontSize:"1.65rem", fontWeight:400, color:T.normalFont, margin:0, lineHeight:1.2 }}>
+        <h3 style={{ fontFamily:"var(--font-serif)", fontSize:"1.75rem", fontWeight:500, color:T.normalFont, margin:0, lineHeight:1.2 }}>
           {card.title}
         </h3>
         <p style={{ fontFamily:"var(--font-josefin)", fontSize:"1rem", color:T.subFont, margin:0 }}>
@@ -122,14 +122,15 @@ const Projects: FC = () => {
   };
 
   return (
-    <section
-      id="projects"
+    <div
+      className="page-fill"
       style={{
-        padding: "clamp(4rem, 10vh, 6rem) clamp(1.25rem, 8vw, 10%)",
-        minHeight: "100svh"
+        padding: "clamp(1.5rem, 5vh, 3.5rem) clamp(1.25rem, 8vw, 10%)",
+        display: "flex",
+        flexDirection: "column",
     }}
   >
-    <SectionLabel>Projects.</SectionLabel>
+    <SectionLabel folio="p. 03">Projects.</SectionLabel>
     
     {/* Editorial Header Section */}
     <div 
@@ -143,17 +144,18 @@ const Projects: FC = () => {
     >
       <h2 
         style={{ 
-          fontFamily:"'Helvetica Neue', sans-serif",
-          fontSize: "clamp(3rem, 5vw, 3.5rem)", 
-          fontWeight: 600, 
+          fontFamily:"var(--font-serif)",
+          fontSize: "clamp(2.75rem, 5vw, 4rem)",
+          fontWeight: 500,
+          letterSpacing: "-0.02em",
           color: T.normalFont, 
           lineHeight: 1.0,
         }}
       >
-        Collection of Past Work
+        Collection of <em>Past Work</em>
       </h2>
     </div>
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div style={{ display: "flex", flexDirection: "column", width: "100%", flex: 1 }}>
       {visible.map((card, idx) => (
         <ProjectRow key={card.id || start + idx} card={card} index={start + idx} />
       ))}
@@ -199,6 +201,6 @@ const Projects: FC = () => {
         </div>
       </nav>
     )}
-  </section>
+  </div>
 );}
 export default Projects;

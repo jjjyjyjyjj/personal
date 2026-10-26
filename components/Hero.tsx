@@ -15,7 +15,7 @@ const btnBase: CSSProperties = {
   letterSpacing: "0.2em",
   textTransform: "uppercase",
   padding: "1rem",
-  borderRadius: "10px",
+  borderRadius: "2px",
   textDecoration: "none",
   transition: "background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s",
 };
@@ -37,7 +37,7 @@ const secondaryBtn: CSSProperties = {
 };
 
 const primaryHover: CSSProperties = {
-  backgroundColor: `${T.accentFont}80`,
+  backgroundColor: `color-mix(in srgb, ${T.accentFont} 50%, transparent)`,
   color: T.darkHoverFont,
   border: `1px solid ${T.darkHoverFont}`,
   transform: "translateY(-2px)",
@@ -54,18 +54,19 @@ const Hero = () => {
   const scalesRef = useParallax(0.18);
   const textRef   = useParallax(0.08);
   return (
-    <section className="hero-section" style={{ minHeight: "100svh", display: "grid", gridTemplateColumns: "0.75fr 1.25fr", overflow: "hidden", position: "relative" }}>
+    <div className="hero-section page-fill" style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", overflow: "hidden", position: "relative" }}>
 
     {/* ── Left ── */}
-    <div className="hero-left-panel" style={{ display:"flex", flexDirection:"column", justifyContent:"center", padding:"clamp(7rem, 14vh, 9rem) clamp(1.5rem, 4vw, 4rem) clamp(2.5rem, 6vh, 4rem) clamp(1.5rem, 5vw, 6rem)", position:"relative", zIndex:2, overflow:"hidden" }}>
+    <div className="hero-left-panel" style={{ display:"flex", flexDirection:"column", justifyContent:"center", padding:"clamp(1rem, 4svh, 4rem) clamp(1.5rem, 4vw, 4rem)", position:"relative", zIndex:2, overflow:"hidden" }}>
     <div ref={textRef} className="parallax-wrap">
-        <h1 className="fade1" style={{ fontFamily:"var(--font-inter)", fontSize:"clamp(2rem,3.5vw,3.2rem)", fontWeight:600, lineHeight:1.2, color:T.normalFont, marginBottom:"1.5rem" }}>
+        <p className="fade1 kicker">Cover Story</p>
+        <h1 className="fade1" style={{ fontFamily:"var(--font-serif)", fontStyle:"italic", fontSize:"clamp(2.5rem, min(5.5vw, 8svh), 4.75rem)", fontWeight:500, lineHeight:1.0, letterSpacing:"-0.02em", color:T.normalFont, marginBottom:"clamp(0.75rem, 2.5svh, 1.5rem)" }}>
           hello world.
         </h1>
-        <p className="fade3" style={{ fontSize:"1.5rem", fontFamily:"var(--font-inter)", color:T.normalFont, lineHeight:1.2, maxWidth:"28rem", fontWeight:"200" }}>
+        <p className="fade3" style={{ fontSize:"1.35rem", fontFamily:"var(--font-serif)", color:T.normalFont, lineHeight:1.35, maxWidth:"26rem", fontWeight:400, borderTop:`1px solid ${T.normalFont}`, paddingTop:"1rem" }}>
           Passionate about learning, creating, and ugly cats.
         </p>
-        <div className="fade4 hero-buttons" style={{ marginTop:"3rem", display:"flex", gap:"1.5rem", alignItems:"center" }}>
+        <div className="fade4 hero-buttons" style={{ marginTop:"clamp(1.25rem, 4svh, 3rem)", display:"flex", gap:"1.5rem", alignItems:"center" }}>
           <a href="#projects" {...interactive(primaryBtn, primaryHover)}>
             Projects
           </a>
@@ -80,8 +81,9 @@ const Hero = () => {
     {/* ── Right: image panel ── */}
     <div className="hero-right-panel" style={{ position:"relative", overflow:"hidden" }}>
       <div ref={scalesRef} className="parallax-wrap" style={{ position:"absolute",  height:"100%", width:"100%", top:0, left:0,bottom:0, zIndex:1 }}>
-      <img src="/hero.jpeg" alt="Background illustration of a figure, drawn by Jia" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
+      <figure style={{ margin:0, height:"100%" }}><img src="/hero.jpeg" alt="Background illustration of a figure, drawn by Jia" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} /></figure>
       </div>
+      <figcaption className="photo-credit">Illustration by Jia</figcaption>
     </div>
 
     {/* ── Languages card ── */}
@@ -89,7 +91,7 @@ const Hero = () => {
       <span style={{ fontFamily:"var(--font-inter)", fontSize:"1rem", letterSpacing:"0.3em", textTransform:"uppercase", color:T.hoverFont }}>Languages</span>
       <span style={{ fontFamily:"var(--font-inter)", fontSize:"0.9rem", fontWeight:300, color:T.accentFont, lineHeight:1.6, letterSpacing:"0.3em" }}>C, Python, Java, SQL, Javascript, TypeScript, HTML/CSS, MIPS Assembly</span>
     </div> */}
-  </section>
+  </div>
 )};
 
 export default Hero;

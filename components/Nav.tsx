@@ -1,56 +1,56 @@
 "use client";
 
-import type { CSSProperties, FC } from "react";
-import Link from "next/link";
-import { T } from "@/lib/tokens";
-import { interactive } from "@/lib/hover";
+import { useEffect, useState, type CSSProperties, type FC } from "react";
 import { NAV_LINKS } from "@/lib/data";
 
-const navLink: CSSProperties = {
-  fontFamily: "var(--font-inter)",
-  fontSize: "0.9rem",
-  fontWeight: 400,
-  letterSpacing: "0.25em",
-  textTransform: "uppercase",
-  color: T.accentFont,
-  textDecoration: "none",
-  transition: "color 0.3s",
+/* Index tabs that stick out of the page edge, one colour per section, like
+   divider tabs in a magazine binder. The tab for the section in view pulls
+   further out. Layout, colours and the mobile (top-edge) variant live in
+   globals.css. */
+const TAB_COLORS = ["var(--tab-1)", "var(--tab-2)", "var(--tab-3)", "var(--tab-4)"] as const;
+
+const Nav: FC = () => {
+  const [active, setActive] = useState<string>(NAV_LINKS[0].toLowerCase());
+
+  useEffect(() => {
+    const sections = NAV_LINKS
+      .map((name) => document.getElementById(name.toLowerCase()))
+      .filter((el): el is HTMLElement => el !== null);
+
+    // A thin band across the middle of the viewport: whichever section
+    // crosses it owns the active tab.
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <nav className="tab-rail" aria-label="Sections">
+      <ul className="tab-list">
+        {NAV_LINKS.map((name, i) => {
+          const id = name.toLowerCase();
+          return (
+            <li key={name}>
+              <a
+                href={`#${id}`}
+                className="tab"
+                aria-current={active === id ? "true" : undefined}
+                style={{ "--tab": TAB_COLORS[i % TAB_COLORS.length] } as CSSProperties}
+              >
+                {name}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
 };
-
-const navLinkHover: CSSProperties = { color: T.hoverFont };
-
-const Nav:FC = () => (
-  <nav
-    style={{
-      position: "fixed", zIndex: 100, width: "100%",
-      display: "flex", justifyContent: "space-between", alignItems: "center",
-      padding: "1rem clamp(1.25rem, 4vw, 4rem)",
-      backgroundColor: T.nav,
-      borderBottom:"2px solid " + T.accentFont,
-    }}
-  >
-    <Link
-      href="/"
-      style={{
-        fontFamily:"var(--font-inter)",
-        fontSize: "2.5rem", fontWeight: 600,
-        textTransform: "uppercase", color: T.accentFont,
-        letterSpacing: "-0.05em", textDecoration: "none"
-      }}
-    >
-      Jia
-    </Link>
-
-    <ul style={{ display: "flex", flexWrap: "wrap", gap: "clamp(0.9rem, 2.5vw, 2.5rem)", listStyle: "none", margin: 0, padding: 0 }}>
-      {NAV_LINKS.map((name) => (
-        <li key={name}>
-          <a href={`#${name.toLowerCase()}`} {...interactive(navLink, navLinkHover)}>
-            {name}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
 
 export default Nav;

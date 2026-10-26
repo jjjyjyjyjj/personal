@@ -28,7 +28,7 @@ const About: FC = () => {
   const textRef   = useParallax(0.06);
 
   return (
-    <section id="about" className="about-grid" style={{ maxHeight:"100vh" }}>
+    <div className="about-grid page-fill" style={{ display:"flex", flexDirection:"column" }}>
       <div className="about-image-col">
         <div ref={spreadRef} className="about-spread">
         {SPREAD.map((p) => (
@@ -49,8 +49,8 @@ const About: FC = () => {
       <div className="about-text-col" style={{ width:"100%", padding:"1.5rem clamp(1.5rem, 5vw, 5rem)" }}>
         <div ref={textRef} className="parallax-wrap about-text-grid" style={{ width:"100%", display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:"clamp(1rem, 2.5vw, 2.5rem)" }}>
           <div style={{ paddingLeft:"0rem" }}>
-          <SectionLabel>About.</SectionLabel>
-            <h2 style={{ fontFamily:"var(--font-inter)", fontSize:"clamp(2rem,3.5vw,3.2rem)", fontWeight:600, letterSpacing:"0.03em", lineHeight:1.05, color: T.normalFont}}>
+          <SectionLabel folio="p. 02">About.</SectionLabel>
+            <h2 style={{ fontFamily:"var(--font-serif)", fontSize:"clamp(2.25rem,4vw,3.6rem)", fontWeight:500, fontStyle:"italic", letterSpacing:"-0.01em", lineHeight:1.0, color: T.normalFont, marginBottom:"1.25rem"}}>
               {HEADING_TIERS.map((word, i) => (
                 <span key={word} style={{ display:"block", marginLeft:`calc(${i} * ${TIER_STEP})` }}>
                   {word}{i < HEADING_TIERS.length - 1 ? " " : ""}
@@ -66,13 +66,13 @@ const About: FC = () => {
               ))}
             </p>
             </div>
-          <div>
-          <p style={{ fontFamily:"var(--font-inter)", fontSize:"1.05rem", fontWeight:300, lineHeight:1.9, color:T.normalFont, maxWidth:"34rem", paddingTop:"0.5rem"}}>
+          <div className="col-rule">
+          <p className="dropcap" style={{ fontFamily:"var(--font-inter)", fontSize:"1.05rem", fontWeight:300, lineHeight:1.9, color:T.normalFont, maxWidth:"34rem", paddingTop:"0.5rem"}}>
             I like building stuff that helps my friends and I:
             <br />1. Save money<br />2. Make our lives easier<br />3. Entertain us
             </p>
             </div>
-            <div>
+            <div className="col-rule">
               <p style={{ fontFamily:"var(--font-inter)", fontSize:"1.05rem", fontWeight:300, lineHeight:1.9, color:T.normalFont, maxWidth:"34rem", paddingTop:"0.5rem"}}>
             In my freetime, I&apos;ve ran a small business selling handmade jewelry. I also like drawing, going to the gym and staring at ugly animals on the street.
             <br /><br />I&apos;ve always been fascinated by the intersection of technology and design, and I&apos;m constantly looking for ways to bring those two worlds together.
@@ -81,7 +81,7 @@ const About: FC = () => {
         </div>
         </div>
         {/* </div> */}
-      </section>
+      </div>
   );
 };
 
