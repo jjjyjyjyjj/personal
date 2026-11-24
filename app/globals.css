@@ -650,6 +650,13 @@ a {
    The board is a square sized by the page height, so the whole page still
    fits one screen; the wall takes the remaining width. */
 .drawings {
+  /* Space under the Send row: the status line, the gap above it, and the
+     room below the board. The wall's pager is lifted by the same amount so
+     it lines up with the Send button. */
+  --board-gap: 0.6rem;
+  --status-h: 1.2rem;
+  --below-board: 50px;
+  --send-h: 2.5rem;
   display: flex;
   flex-direction: column;
   padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1.25rem, 6vw, 6rem) clamp(1.75rem, 3vh, 2rem);
@@ -665,6 +672,8 @@ a {
   /* lets the board measure the height actually left on the page (cqh) */
   container-type: size;
   display: grid;
+  /* the row is as tall as the board column; the wall column matches it */
+  align-content: start;
   grid-template-columns: auto 1fr;
   gap: clamp(1.5rem, 4vw, 4rem);
 }
@@ -680,6 +689,9 @@ a {
 
 .drawings-wall-col {
   min-width: 0;
+  /* takes no say in the row's height, so it ends where the board ends */
+  contain: size;
+  padding-bottom: calc(var(--below-board) + var(--status-h) + var(--board-gap));
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--rule);
@@ -699,8 +711,8 @@ a {
 .board {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 50px;
+  gap: var(--board-gap);
+  margin-bottom: var(--below-board);
 }
 
 .board-tools {
@@ -831,7 +843,8 @@ a {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 0.75rem 1.1rem;
+  height: var(--send-h, 2.5rem);
+  padding: 0 1.1rem;
   border-radius: 5px;
   border: 1px solid var(--ink);
   background: var(--ink);
@@ -846,7 +859,8 @@ a {
 }
 
 .board-status {
-  min-height: 1.2em;
+  min-height: var(--status-h);
+  line-height: var(--status-h);
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 0.95rem;
@@ -877,7 +891,7 @@ a {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 0.3fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: clamp(0.75rem, 2vw, 1.75rem);
 }
 
@@ -913,6 +927,8 @@ a {
 }
 
 .wall-pager {
+  /* same height as the Send button, so the two sit on one line */
+  min-height: var(--send-h);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -969,6 +985,8 @@ a {
   }
 
   .drawings-wall-col {
+    contain: none;
+    padding-bottom: 0;
     border-left: none;
     padding-left: 0;
     border-top: 1px solid var(--rule);
