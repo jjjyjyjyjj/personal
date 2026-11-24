@@ -877,8 +877,7 @@ a {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  /* always two rows, so one drawing is card-sized rather than wall-sized */
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 0.3fr));
   gap: clamp(0.75rem, 2vw, 1.75rem);
 }
 
@@ -889,7 +888,7 @@ a {
   max-height: 100%;
   aspect-ratio: 1 / 1.13;
   align-self: start;
-  padding: 0.5rem 0.5rem 0.4rem;
+  padding: 0.4rem 0.4rem 0.3rem;
   background: #FBF8F3;
   box-shadow: 0 8px 20px -12px rgba(var(--shadow), 0.55);
 }
