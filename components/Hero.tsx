@@ -85,12 +85,6 @@ const Hero = () => {
       </div>
       <figcaption className="photo-credit">Illustration by Jia</figcaption>
     </div>
-
-    {/* ── Languages card ── */}
-    {/* <div className="fade5 hero-lang-card" style={{ position:"absolute", bottom:"3rem", left:"25%", right:0, zIndex:10, backgroundColor:"#2524227f", padding:"1.25rem 1.5rem", boxShadow:"0 20px 60px rgba(14,15,13,0.18)", display:"flex", flexDirection:"column", gap:"0.5rem", maxWidth:"50%" }}>
-      <span style={{ fontFamily:"var(--font-inter)", fontSize:"1rem", letterSpacing:"0.3em", textTransform:"uppercase", color:T.hoverFont }}>Languages</span>
-      <span style={{ fontFamily:"var(--font-inter)", fontSize:"0.9rem", fontWeight:300, color:T.accentFont, lineHeight:1.6, letterSpacing:"0.3em" }}>C, Python, Java, SQL, Javascript, TypeScript, HTML/CSS, MIPS Assembly</span>
-    </div> */}
   </div>
 )};
 

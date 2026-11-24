@@ -7,7 +7,7 @@ import { NAV_LINKS } from "@/lib/data";
    divider tabs in a magazine binder. The tab for the section in view pulls
    further out. Layout, colours and the mobile (top-edge) variant live in
    globals.css. */
-const TAB_COLORS = ["var(--tab-1)", "var(--tab-2)", "var(--tab-3)", "var(--tab-4)"] as const;
+const TAB_COLORS = ["var(--tab-1)", "var(--tab-2)", "var(--tab-3)", "var(--tab-5)", "var(--tab-4)"] as const;
 
 const Nav: FC = () => {
   const [active, setActive] = useState<string>(NAV_LINKS[0].toLowerCase());

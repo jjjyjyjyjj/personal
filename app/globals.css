@@ -26,6 +26,7 @@
   --tab-2:       #5F7480;
   --tab-3:       #4B4439;
   --tab-4:       #9A6B4F;
+  --tab-5:       #6B7A3A;
   --tab-ink:     #F7F2EB;
   --doodle-filter: none;
 }
@@ -54,6 +55,7 @@
     --tab-2:       #93AAB6;
     --tab-3:       #CDBFA8;
     --tab-4:       #D3A27F;
+    --tab-5:       #B4BE8A;
     --tab-ink:     #1E1917;
     --doodle-filter: invert(0.9);
   }
@@ -79,6 +81,7 @@
   --tab-2:       #93AAB6;
   --tab-3:       #CDBFA8;
   --tab-4:       #D3A27F;
+  --tab-5:       #B4BE8A;
   --tab-ink:     #1E1917;
   --doodle-filter: invert(0.9);
 }
@@ -642,4 +645,434 @@ a {
     border-left: none;
     padding-left: 0;
   }
+}
+/* ── Readers' drawings ──
+   The board is a square sized by the page height, so the whole page still
+   fits one screen; the wall takes the remaining width. */
+.drawings {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1.25rem, 6vw, 6rem) clamp(1.75rem, 3vh, 2rem);
+}
+
+.drawings .running-head {
+  margin-bottom: clamp(0.75rem, 2vh, 1.5rem);
+}
+
+.drawings-grid {
+  flex: 1;
+  min-height: 0;
+  /* lets the board measure the height actually left on the page (cqh) */
+  container-type: size;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* The canvas is as wide as this column, so the column's width sets the
+   board's height: what's left once the title, two rows of tools, the send
+   row and the status line (14rem together) are taken out. 18rem is the
+   narrowest the tools still fit in two rows. */
+.drawings-board-col {
+  width: min(32rem, 100cqh - 14rem, 55cqw);
+  min-width: 18rem;
+}
+
+.drawings-wall-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(1rem, 3vw, 3rem);
+}
+
+.drawings-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, min(3.5vw, 5svh), 3rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 50px;
+}
+
+.board-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.board-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.board-swatch,
+.board-tool {
+  height: 1.9rem;
+  min-width: 1.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.board-swatch {
+  width: 1.9rem;
+  /* ringed in the board's paper colour so dark inks read in dark mode too */
+  border: 3px solid #FBF8F3;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+.board-swatch[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.board-tool[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--on-ink);
+  border-color: var(--ink);
+}
+
+.board-tool:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.board-text {
+  padding: 0 0.75rem;
+  font-family: var(--font-inter);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.board-dot {
+  display: block;
+  max-width: 1.2rem;
+  max-height: 1.2rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.board-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  background: #FBF8F3;
+  border: 1px solid var(--rule);
+  box-shadow: 0 10px 30px -18px rgba(var(--shadow), 0.25);
+  cursor: crosshair;
+  touch-action: none;
+  margin-bottom: 10px;
+}
+
+.board-send {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.board-name {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: var(--font-inter);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.board-name input {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  padding: 0.2rem 0;
+  outline: none;
+}
+
+.board-name input:focus-visible {
+  border-bottom-width: 2px;
+}
+
+.board-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.board-submit {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.1rem;
+  border-radius: 5px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--on-ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.board-submit:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.board-status {
+  min-height: 1.2em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.wall,
+.wall-note {
+  flex: 1;
+  min-height: 0;
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+}
+
+.wall-note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--sub);
+}
+
+.wall-grid {
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* always two rows, so one drawing is card-sized rather than wall-sized */
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.wall-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1 / 1.13;
+  align-self: start;
+  padding: 0.5rem 0.5rem 0.4rem;
+  background: #FBF8F3;
+  box-shadow: 0 8px 20px -12px rgba(var(--shadow), 0.55);
+}
+
+.wall-card img {
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.wall-sig {
+  padding-top: 0.3rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: #4A4038;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wall-pager {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-family: var(--font-inter);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.wall-pager button {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.wall-pager button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (max-width: 1024px) {
+  .wall-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .drawings-grid {
+    grid-template-columns: 1fr;
+    /* the page grows with its content here, so there's no height to measure */
+    container-type: normal;
+  }
+
+  .drawings-board-col {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .wall-grid {
+    grid-template-rows: none;
+  }
+
+  .wall-card {
+    max-height: none;
+  }
+
+  .drawings-wall-col {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+  }
+
+  /* five tabs have to share the phone's top edge */
+  .tab {
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ── Approval page (/admin) ── */
+.admin {
+  max-width: 1100px;
+  margin: var(--sheet-gap) auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--paper);
+  box-shadow: 0 24px 60px -24px rgba(var(--shadow), 0.45);
+  min-height: calc(100svh - 2 * var(--sheet-gap));
+}
+
+.admin-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 3px double var(--ink);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-head h1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: var(--ink);
+}
+
+.admin-link {
+  font-family: var(--font-inter);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sub);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.admin-login {
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.6rem;
+  border: 1px solid var(--rule);
+}
+
+.admin-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #FBF8F3;
+}
+
+.admin-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--font-inter);
+  font-size: 0.7rem;
+  color: var(--sub);
+}
+
+.admin-meta .wall-sig {
+  color: var(--ink);
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }

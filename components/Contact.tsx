@@ -69,7 +69,7 @@ const Contact: FC = () => (
     >
       {/* Left Column */}
       <div className="contact-grid" style={{ display:"flex", flexDirection:"column" }}>
-        <SectionLabel folio="p. 04">Contact.</SectionLabel>
+        <SectionLabel folio="p. 05">Contact.</SectionLabel>
         <h2 style={{ fontSize:"clamp(3rem,6vw,5.5rem)", fontWeight:500, lineHeight:1.0, color:T.charcoal, letterSpacing:"-0.03em", margin:"1rem 0 2rem", fontFamily:"var(--font-serif)", }}>
           Let&apos;s <br />
           <span style={{ fontStyle:"italic", paddingLeft:"1.5rem" }}>connect</span>
